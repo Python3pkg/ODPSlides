@@ -1,7 +1,7 @@
 # Python 2 and 3
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import print_function
+
+
+
 
 import sys
 from collections import OrderedDict
@@ -14,7 +14,7 @@ else:
 
 # get StringIO for either python 2.x or 3.x
 try:
-    from StringIO import StringIO
+    from io import StringIO
 except ImportError:
     from io import StringIO
 
@@ -75,7 +75,7 @@ class TemplateXML_File(object):
                     uri = sL[0][1:]
                     self.qnameOD[elem.tag] = '%s:%s'%(self.nsOD[uri], name)
 
-                for qname,v in elem.attrib.items():
+                for qname,v in list(elem.attrib.items()):
                     sL = qname.split('}')
                     if len(sL) == 2:
                         name = sL[1]
@@ -131,7 +131,7 @@ class TemplateXML_File(object):
             except:
                 print( 'NOTICE: No children for:', parent )
                 
-        for key,item in self.original_posD.items():
+        for key,item in list(self.original_posD.items()):
             self.get_elem_from_orig_posD[item] = key # get elem from original_posD
             
             
@@ -201,7 +201,7 @@ class TemplateXML_File(object):
             short_empty_elements = True # use short format for empty elements
             ET._serialize_xml(dummy_file.write, self.root, self.qnameOD, self.nsOD, short_empty_elements)
 
-        sOut = u"".join(xml_dataL)
+        sOut = "".join(xml_dataL)
         return sOut.encode('utf-8')
 
     def elem_tostring(self, elem, include_ns=False, use_linebreaks=True, include_header=False):
@@ -214,9 +214,9 @@ class TemplateXML_File(object):
                 
                 if sys.version_info < (3,):
                     sInp = sInp.decode('utf-8')
-                if sInp.strip().startswith(u'xmlns:') and not include_ns:
+                if sInp.strip().startswith('xmlns:') and not include_ns:
                     return
-                if sInp.strip().endswith(u'>') and use_linebreaks:
+                if sInp.strip().endswith('>') and use_linebreaks:
                     sInp = sInp.replace('>','>\n')
                     
                 xml_dataL.append(sInp )
@@ -232,7 +232,7 @@ class TemplateXML_File(object):
             short_empty_elements = True # use short format for empty elements
             ET._serialize_xml(dummy_file.write, elem, self.qnameOD, self.nsOD, short_empty_elements)
 
-        sOut = u"".join(xml_dataL)
+        sOut = "".join(xml_dataL)
         sOut = sOut.encode('utf-8')
         if include_header and self.xml_header:
             sOut = self.xml_header + '\n' + sOut
@@ -278,7 +278,7 @@ class TemplateXML_File(object):
 
     def NS_attrib(self, attD ):
         D = OrderedDict()
-        for key,val in attD.items():
+        for key,val in list(attD.items()):
             D[ self.NS(key) ] = val
         return D
 
@@ -293,7 +293,7 @@ class TemplateXML_File(object):
             uri = sL[0][1:]
             self.qnameOD[my_new_elem.tag] = '%s:%s'%(self.nsOD[uri], name)
 
-        for qname,v in my_new_elem.attrib.items():
+        for qname,v in list(my_new_elem.attrib.items()):
             sL = qname.split('}')
             if len(sL) == 2:
                 name = sL[1]
@@ -327,7 +327,7 @@ class TemplateXML_File(object):
             uri = sL[0][1:]
             self.qnameOD[my_new_elem.tag] = '%s:%s'%(self.nsOD[uri], name)
 
-        for qname,v in my_new_elem.attrib.items():
+        for qname,v in list(my_new_elem.attrib.items()):
             sL = qname.split('}')
             if len(sL) == 2:
                 name = sL[1]
@@ -356,7 +356,7 @@ class TemplateXML_File(object):
                 else:
                     self.annn_style8nameD[ att_val ] = elem
 
-            for aname, aval in elem.items():
+            for aname, aval in list(elem.items()):
                 if aname.endswith( '}style-name' ):
                     if aval in self.style_refD:
                         self.style_refD[ aval ] = [ self.style_refD[ aval ] ]
@@ -376,7 +376,7 @@ class TemplateXML_File(object):
 
         self.max_annn_def = -1
         self.min_annn_def = 9999999999
-        for annn in self.annn_style8nameD.keys():
+        for annn in list(self.annn_style8nameD.keys()):
             self.max_annn_def = max( self.max_annn_def, int(annn[1:]) )
             self.min_annn_def = min( self.min_annn_def, int(annn[1:]) )
         #print('min_annn_def self.annn_style8nameD = ', self.min_annn_def)
@@ -385,7 +385,7 @@ class TemplateXML_File(object):
 
         self.max_annn_used = -1
         self.min_annn_used = 9999999999
-        for annn in self.style_refD.keys():
+        for annn in list(self.style_refD.keys()):
             self.max_annn_used = max( self.max_annn_used, int(annn[1:]) )
             self.min_annn_used = min( self.min_annn_used, int(annn[1:]) )
         #print('min_annn_used self.annn_style8nameD = ', self.min_annn_used)
@@ -394,7 +394,7 @@ class TemplateXML_File(object):
 
         self.max_idnnn_def = -1
         self.min_idnnn_def = 9999999999
-        for idnnn in self.id_draw8idD.keys():
+        for idnnn in list(self.id_draw8idD.keys()):
             self.max_idnnn_def = max( self.max_idnnn_def, int(idnnn[2:]) )
             self.min_idnnn_def = min( self.min_idnnn_def, int(idnnn[2:]) )
         #print('min_idnnn_def self.id_draw8idD = ', self.min_idnnn_def)
@@ -430,7 +430,7 @@ class TemplateXML_File(object):
                 # looking for a style element attribute (e.g. an attrib value like "a123")
                 for sub_elem in elem.iter():
                     # looking for, for example text:style-name="a28"
-                    for attname, attval in sub_elem.items():
+                    for attname, attval in list(sub_elem.items()):
                         if (attval in self.style_refD)  and (attval in self.annn_style8nameD):
                             style_elem = self.annn_style8nameD[attval]
                             
@@ -478,7 +478,7 @@ if __name__ == "__main__":
     print( 'ss2 =',ss2,'  (Should be None since can NOT search on tag)' )
 
     #print( TFile.findall( 'table:table', elem_obj=ss ) )
-    print
+    print()
     #print( TFile.qnameOD.items()[:2] )
 
     newtab1 = TFile.new_elem( '{urn:oasis:names:tc:opendocument:xmlns:table:1.0}table', attribOD=None)
@@ -489,4 +489,4 @@ if __name__ == "__main__":
 
     newtab3 = TFile.new_elem( 'table:table', attribOD={'table:name':'Sheet1'})
     print( 'newtab3 =',newtab3 )
-    print( 'newtab3 =',newtab3.items() )
+    print( 'newtab3 =',list(newtab3.items()) )

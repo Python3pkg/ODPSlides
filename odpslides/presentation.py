@@ -1,7 +1,7 @@
 # Support Python 2 and 3
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import print_function
+
+
+
 
 import os
 import subprocess
@@ -316,7 +316,7 @@ class Presentation(object):
                     
                     if len(c)>1:
                         #i = int( level )
-                        bchar = u'\u2022' # BULLET_L[ i-1 ]  # u'\u25CF'
+                        bchar = '\u2022' # BULLET_L[ i-1 ]  # u'\u25CF'
                         elem.set(force_to_tag('text:bullet-char'), bchar)
                         #print(bchar, end='')
         

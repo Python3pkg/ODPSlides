@@ -1,7 +1,7 @@
 # Support Python 2 and 3
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import print_function
+
+
+
 
 import os
 import sys
@@ -154,9 +154,9 @@ class Page(object):
             for content_outline, master_outline in zip(self.draw_frameD['outline'], self.master_frameD['outline'] ):
                 content_outline.clear()
                 content_outline.extend( master_outline.getchildren() )
-                for key,val in master_outline.items():
+                for key,val in list(master_outline.items()):
                     content_outline.set(key,val)
-                for key in self.styles_auto_styles.styles_style_name_lookupD.keys():
+                for key in list(self.styles_auto_styles.styles_style_name_lookupD.keys()):
                     if key not in self.content_auto_styles.content_style_name_lookupD:
                         self.content_auto_styles.content_style_name_lookupD[key] = \
                                 self.styles_auto_styles.styles_style_name_lookupD[key]
@@ -290,7 +290,7 @@ class Page(object):
         self.draw_page_style_name = ''
         
         for elem in self.draw_page.iter():
-            for aname, aval in elem.items():
+            for aname, aval in list(elem.items()):
                 if aname.endswith( '}style-name' ):
                     a_new = self.presObj.get_next_a_style()
                     
@@ -468,7 +468,7 @@ class Page(object):
 
         else:
             print('...ERROR... could NOT swap objects and outline svg:y values')
-            print('..........',self.draw_frameD.keys())
+            print('..........',list(self.draw_frameD.keys()))
     
     def set_drawframe_font_color( self, frame_class='title', font_color='black', nskip=0 ):
         """

@@ -113,14 +113,14 @@ for ipage,page in enumerate(P.new_content_pageL):
     countD = {}
     content_item_N = 1
     fig = plt.figure()
-    print 'Page #%i, %s'%(ipage+1, page.disp_name)
-    print 'Top  ', page.top_blockade
-    print 'Bot  ', page.bottom_blockade
-    print 'Right',page.right_blockade
-    print 'Left ',page.left_blockade
-    print 'Unique Blockade Objects =',len(page.unique_blockadeD), sorted( page.unique_blockadeD.keys() )
+    print('Page #%i, %s'%(ipage+1, page.disp_name))
+    print('Top  ', page.top_blockade)
+    print('Bot  ', page.bottom_blockade)
+    print('Right',page.right_blockade)
+    print('Left ',page.left_blockade)
+    print('Unique Blockade Objects =',len(page.unique_blockadeD), sorted( page.unique_blockadeD.keys() ))
     for iframe,fd in enumerate(page.frame_dimL):
-        print '    ',fd.bbox, fd.bottom_blockade
+        print('    ',fd.bbox, fd.bottom_blockade)
         #print '       Top  ',fd.top_blockade
         #print '       Bot  ',fd.bottom_blockade
         #print '       Right',fd.right_blockade
@@ -137,7 +137,7 @@ for ipage,page in enumerate(P.new_content_pageL):
                 horizontalalignment='center', fontsize=18,
                 verticalalignment='center')        
         
-        for b in page.unique_blockadeD.values():
+        for b in list(page.unique_blockadeD.values()):
             #for b in [fd.left_blockade, fd.right_blockade, fd.top_blockade, fd.bottom_blockade]:
             plt.plot( [b.p0.x, b.p1.x], [b.p0.y, b.p1.y], 'r-' )
         
@@ -149,7 +149,7 @@ for ipage,page in enumerate(P.new_content_pageL):
     #plt.savefig( 'Page%i_%s.png'%(ipage+1, page.disp_name.replace(' ','_')) )
         
         
-    print '-'*77
+    print('-'*77)
 
     #plt.legend(loc='best')
     #plt.grid(True)

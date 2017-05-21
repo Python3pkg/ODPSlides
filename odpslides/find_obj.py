@@ -1,7 +1,7 @@
 # Python 2 and 3
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import print_function
+
+
+
 
 from odpslides.namespace import XMLNS_STR, force_to_short, force_to_tag, ODF_NAMESPACES
 
@@ -20,7 +20,7 @@ def NS_attrib( attD ):
     like: '{urn:oasis:names:tc:opendocument:xmlns:table:1.0}table' : 'value'
     """
     D = {}
-    for key,val in attD.items():
+    for key,val in list(attD.items()):
         D[ NS(key) ] = val
     return D
 
@@ -45,7 +45,7 @@ def find_elem_w_attrib(path_or_tag, parent, nsOD, attrib=None, nth_match=0, retu
     # Create dictionary of 
     D = {}
     if attrib:
-        for atag,val in attrib.items():
+        for atag,val in list(attrib.items()):
             atag = NS( atag, nsOD )
             D[atag] = val
     
@@ -54,7 +54,7 @@ def find_elem_w_attrib(path_or_tag, parent, nsOD, attrib=None, nth_match=0, retu
     
     for i_match,elem in enumerate(matchL):
         got_attrib = True
-        for atag, val in D.items():
+        for atag, val in list(D.items()):
             if elem.get(atag, None) != val:
                 got_attrib = False
         if got_attrib:

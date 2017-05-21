@@ -1,8 +1,8 @@
 # Support Python 2 and 3
 
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import print_function
+
+
+
 
 
 def python_def_from_tag( tag ):
@@ -108,10 +108,10 @@ ODF_NAMESPACES = {
 # Create a reverse lookup as well
 #   e.g. REV_ODF_NAMESPACES["urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"] == "draw"
 REV_ODF_NAMESPACES = {}
-for key,val in ODF_NAMESPACES.items():
+for key,val in list(ODF_NAMESPACES.items()):
     REV_ODF_NAMESPACES[val] = key
 
-XMLNS_STR = ' '.join( ['xmlns:%s="%s"'%(sh,tag) for sh,tag in ODF_NAMESPACES.items()] )
+XMLNS_STR = ' '.join( ['xmlns:%s="%s"'%(sh,tag) for sh,tag in list(ODF_NAMESPACES.items())] )
 
 if __name__ == "__main__":
     
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     #sys.exit()
     TFile = TemplateXML_File(r'D:\temp\open_office\content.xml')
     #TFile = TemplateXML_File(r'D:\temp\open_office_v2\GN2_Press\content.xml')
-    for key,val in TFile.rev_nsOD.items():
+    for key,val in list(TFile.rev_nsOD.items()):
         if key not in ODF_NAMESPACES:
             print( '%s not in ODF_NAMESPACES'%key )
     

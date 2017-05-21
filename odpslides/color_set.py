@@ -1,7 +1,7 @@
 # Support Python 2 and 3
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import print_function
+
+
+
 
 from odpslides.color_utils import getValidHexStr
 from odpslides.namespace import XMLNS_STR, force_to_short, force_to_tag

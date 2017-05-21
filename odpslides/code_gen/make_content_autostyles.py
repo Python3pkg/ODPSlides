@@ -1,7 +1,7 @@
 # Support Python 2 and 3
-from __future__ import unicode_literals
-from __future__ import absolute_import
-from __future__ import print_function
+
+
+
 
 import sys, os
 from collections import OrderedDict
@@ -148,7 +148,7 @@ def build_element( s ):
             except:
                 val = 0
             return val
-        keyL = sorted( content_style_name_lookupD.keys(), key=int_part )
+        keyL = sorted( list(content_style_name_lookupD.keys()), key=int_part )
         for key in keyL:
             fOut.write( 'content_style_name_lookupD["%s"] = %s\n'%(key, content_style_name_lookupD[key]) )
         
